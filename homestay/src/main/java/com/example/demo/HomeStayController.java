@@ -33,6 +33,11 @@ public class HomeStayController {
 	{
 		return "login.html";
 	}
+	@RequestMapping("/main")  
+	public String main(Model model)  
+	{
+		return "main.html";
+	}
 	@RequestMapping("/signup")  
 	public String signup(@RequestParam("uname") String name,@RequestParam("email") String email,@RequestParam("pass") String pwd)  
 	{
@@ -50,13 +55,16 @@ public class HomeStayController {
 		User u=uservice.getCustomer(email);
 		String pwd2=u.getPass();
 		if(pwd2.matches(pwd)) {
+			
 			return "redirect:/home";
 		}
 		else {
+			
 			return "redirect:/";
 		}
 		}
 		catch(Exception e) {
+			
 			return "redirect:/";
 		}
 		
