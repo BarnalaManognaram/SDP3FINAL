@@ -11,6 +11,7 @@ public class UserService {
 
 	@Autowired
 	CustomerRepo cr;
+	
 	public void savecustomer(User u)
 	{
 		cr.save(u);
@@ -18,5 +19,6 @@ public class UserService {
 	public User getCustomer(String email) {
 		return cr.findByEmail(email);
 	}
+	
 	
 }

@@ -26,12 +26,19 @@ public class HomeStayController {
 	
 
 		@Autowired UserService uservice;
-	
+		@Autowired ChecknowService cservice;
+		
 	
 	@RequestMapping("/")  
 	public String login(Model model)  
 	{
 		return "login.html";
+	}
+
+	@RequestMapping("/places")  
+	public String places(Model model)  
+	{
+		return "places.html";
 	}
 	@RequestMapping("/main")  
 	public String main(Model model)  
@@ -39,15 +46,17 @@ public class HomeStayController {
 		return "main.html";
 	}
 	@RequestMapping("/signup")  
-	public String signup(@RequestParam("uname") String name,@RequestParam("email") String email,@RequestParam("pass") String pwd)  
+	public String signup(@RequestParam("uname") String name,@RequestParam("email") String uemail,@RequestParam("pass") String pwd)  
 	{
 		
 		User u=new User();
 		u.setUname(name);
-		u.setEmail(email);
+		u.setEmail(uemail);
 		u.setPass(pwd);
-		uservice.savecustomer(u);
-		return "redirect:/";
+	uservice.savecustomer(u);
+				
+			return "redirect:/";
+		
 	}
 	@RequestMapping("/signin")
 	public String Signin(@RequestParam("uname") String email,@RequestParam("pass") String pwd) {
@@ -71,6 +80,11 @@ public class HomeStayController {
 		
 	}
 	
+	@RequestMapping("/invalidSignup")
+		public String InvalidSignup(Model model) {
+		return "InvalidSignup.html";
+	}
+	
 	@RequestMapping("/home")  
 	public String home(Model model)  
 	{
@@ -83,6 +97,7 @@ public class HomeStayController {
 	{
 		return "about.html";
 	}
+	
 	
 	@RequestMapping("/contact")  
 	public String contact(Model model)  
@@ -102,7 +117,23 @@ public class HomeStayController {
 		return "thankyou.html";
 	}
 
-	
-	
+	@RequestMapping("/checknow")  
+	public String Checkout(Model model)  
+	{
+		return "Checkout.html";
+	}
+
+	@RequestMapping("/checknowdata")
+	public String CheckNowData(@RequestParam("fname") String fname,@RequestParam("email") String email,@RequestParam("addrs") String addrs,@RequestParam("city") String city,@RequestParam("home") String home) {
+		CheckNow ch=new CheckNow();
+		ch.setFname(fname);
+		ch.setEmail(email);
+		ch.setAddrs(addrs);
+		ch.setCity(city);
+		ch.setHome(home);
+		cservice.saveData(ch);
+		return "redirect:/";
+		
+	}
 }
 

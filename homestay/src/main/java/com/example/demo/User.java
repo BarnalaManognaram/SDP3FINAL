@@ -12,6 +12,7 @@ public class User {
 	@Id
 	@Column(name="email")
 	private String email;
+
 	@Column(name="uname")
 	private String uname;
 	@Column(name="pass")
